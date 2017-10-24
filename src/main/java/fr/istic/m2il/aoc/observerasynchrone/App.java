@@ -8,6 +8,11 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Generator generator = new GeneratorImpl();
+        Displayer displayer1 = new DisplayerImpl();
+        generator.attach(displayer1);
+        Displayer displayer2 = new DisplayerImpl();
+        generator.attach(displayer2);
+        generator.generate();
     }
 }

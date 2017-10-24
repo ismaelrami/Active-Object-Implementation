@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>fr.istic.m2il.aoc</groupId>
-  <artifactId>fr.istic.m2il.aoc.activeobject</artifactId>
+  <artifactId>fr.istic.m2il.aoc.observerasynchrone</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>fr.istic.m2il.aoc.activeobject</name>
+  <name>fr.istic.m2il.aoc.observerasynchrone</name>
   <url>http://maven.apache.org</url>
 
   <properties>

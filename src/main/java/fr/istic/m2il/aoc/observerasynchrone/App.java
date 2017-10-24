@@ -1,4 +1,4 @@
-package fr.istic.m2il.aoc;
+package fr.istic.m2il.aoc.observerasynchrone;
 
 /**
  * Hello world!

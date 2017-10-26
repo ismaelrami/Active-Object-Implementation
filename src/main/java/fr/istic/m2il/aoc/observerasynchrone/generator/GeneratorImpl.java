@@ -1,6 +1,7 @@
 package fr.istic.m2il.aoc.observerasynchrone.generator;
 
 import fr.istic.m2il.aoc.observerasynchrone.observer.Observer;
+import fr.istic.m2il.aoc.observerasynchrone.observer.ObserverAsync;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Random;
 
 public class GeneratorImpl implements Generator {
 
-    private List<Observer<Generator>> observers = new ArrayList<Observer<Generator>>();
+    private List<ObserverAsync<Generator>> observers = new ArrayList<ObserverAsync<Generator>>();
     private Integer value;
 
     public Integer getValue() {
@@ -17,7 +18,7 @@ public class GeneratorImpl implements Generator {
 
 
 
-    public void attach(Observer<Generator> observer) {
+/*    public void attach(Observer<Generator> observer) {
         this.observers.add(observer);
     }
 
@@ -29,11 +30,25 @@ public class GeneratorImpl implements Generator {
         for (Observer<Generator> observer:this.observers){
             observer.update(this);
         }
-    }
+    }*/
 
     public void generate() {
         Random r = new Random();
         this.value = r.nextInt(100);
         notifyObservers();
+    }
+
+    public void attach(ObserverAsync<Generator> observerAsync) {
+        this.observers.add(observerAsync);
+    }
+
+    public void detach(ObserverAsync<Generator> observerAsync) {
+        this.observers.remove(observerAsync);
+    }
+
+    public void notifyObservers() {
+        for(ObserverAsync<Generator> observerAsync:this.observers){
+            observerAsync.update(this);
+        }
     }
 }

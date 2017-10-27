@@ -2,3 +2,7 @@
 *.iml
 *.class
 target/
+bin/
+.classpath
+.project
+.settings/

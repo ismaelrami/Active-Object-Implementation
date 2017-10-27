@@ -4,33 +4,30 @@ import fr.istic.m2il.aoc.observerasynchrone.displayer.Displayer;
 import fr.istic.m2il.aoc.observerasynchrone.generator.Generator;
 import fr.istic.m2il.aoc.observerasynchrone.observer.Observer;
 import fr.istic.m2il.aoc.observerasynchrone.observer.ObserverAsync;
+import fr.istic.m2il.aoc.observerasynchrone.observer.Subject;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
 
-public class Channel implements DisplayerAsync, GeneratorAsync/*, Subject<GeneratorAsync>*/ {
+public class Channel implements ObserverAsync<Generator>, GeneratorAsync , Subject<GeneratorAsync>{
 
-    private Displayer displayer;
     private Generator generator;
     ScheduledExecutorService scheduler;
-    private List<Observer<GeneratorAsync>> observersGeneratorAsync = new ArrayList<Observer<GeneratorAsync>>();
+    private Observer<GeneratorAsync> observersChannel ;
 
-    public Channel(Generator generator, Displayer displayer) {
+    public Channel(Generator generator) {
         this.generator = generator;
-        this.displayer = displayer;
         this.scheduler = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
     }
 
 
     public Future<Void> update(Generator subjectasync) {
-        Callable<Void> update = new Update(this.displayer, this);
-
+        Callable<Void> update = new Update(this, this.observersChannel);
         Random randomGenerator = new Random();
-        int delay = randomGenerator.nextInt(5);
+        int delay = randomGenerator.nextInt(1);
         return this.scheduler.schedule(update,delay, TimeUnit.SECONDS);
+
 
     }
 
@@ -41,7 +38,19 @@ public class Channel implements DisplayerAsync, GeneratorAsync/*, Subject<Genera
         return this.scheduler.schedule(getValue, delay, TimeUnit.SECONDS);
     }
 
-    public void attach(ObserverAsync<Generator> observerAsync) {
+    public void attach(Observer<GeneratorAsync> observer) {
+        this.observersChannel = observer;
+    }
+
+    public void detach(Observer<GeneratorAsync> observer) {
+        this.observersChannel = null;
+    }
+
+    public void notifyObservers() {
+
+    }
+
+   /* public void attach(ObserverAsync<Generator> observerAsync) {
         this.generator.attach(observerAsync);
     }
 
@@ -51,7 +60,7 @@ public class Channel implements DisplayerAsync, GeneratorAsync/*, Subject<Genera
 
     public void notifyObservers() {
         this.generator.notifyObservers();
-    }
+    }*/
 }
 
 

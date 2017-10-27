@@ -2,6 +2,7 @@ package fr.istic.m2il.aoc.observerasynchrone.generator;
 
 import fr.istic.m2il.aoc.observerasynchrone.observer.Observer;
 import fr.istic.m2il.aoc.observerasynchrone.observer.ObserverAsync;
+import fr.istic.m2il.aoc.observerasynchrone.strategy.AlgoDiffusion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class GeneratorImpl implements Generator {
 
     private List<ObserverAsync<Generator>> observers = new ArrayList<ObserverAsync<Generator>>();
     private Integer value;
+    private AlgoDiffusion strategy;
 
     public Integer getValue() {
         return this.value;
@@ -33,6 +35,7 @@ public class GeneratorImpl implements Generator {
     }*/
 
     public void generate() {
+        //this.strategy.execute();
         Random r = new Random();
         this.value = r.nextInt(100);
         notifyObservers();
@@ -50,5 +53,13 @@ public class GeneratorImpl implements Generator {
         for(ObserverAsync<Generator> observerAsync:this.observers){
             observerAsync.update(this);
         }
+    }
+
+    public AlgoDiffusion getStrategy() {
+        return strategy;
+    }
+
+    public void setStrategy(AlgoDiffusion strategy) {
+        this.strategy = strategy;
     }
 }

@@ -1,28 +1,24 @@
 package fr.istic.m2il.aoc.observerasynchrone.channel;
 
-import fr.istic.m2il.aoc.observerasynchrone.channel.Channel;
-import fr.istic.m2il.aoc.observerasynchrone.displayer.Displayer;
-import fr.istic.m2il.aoc.observerasynchrone.generator.Generator;
+import fr.istic.m2il.aoc.observerasynchrone.observer.Observer;
 
 import java.util.concurrent.Callable;
 
 public class Update implements Callable<Void> {
 
-    private Displayer displayer;
-    private Channel channel;
+    private GeneratorAsync generatorAsync;
+    private Observer<GeneratorAsync> obsever;
 
-    public Update(Displayer displayer, Channel channel) {
-
-        this.displayer = displayer;
-        this.channel = channel;
-
+    public Update(GeneratorAsync generatorAsync, Observer<GeneratorAsync> obsever) {
+        this.generatorAsync = generatorAsync;
+        this.obsever = obsever;
     }
 
-    private void update(Channel channel){
-        this.displayer.update(channel);
+    private void update(){
+        this.obsever.update(this.generatorAsync);
     }
     public Void call() throws Exception {
-        this.displayer.update(this.channel);
+        update();
         return null;
     }
 }

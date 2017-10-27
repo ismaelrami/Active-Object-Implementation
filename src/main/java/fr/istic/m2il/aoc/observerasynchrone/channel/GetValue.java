@@ -17,6 +17,6 @@ public class GetValue implements Callable<Integer>{
     }
 
     public Integer call() throws Exception {
-        return this.getValue();
+        return getValue();
     }
 }

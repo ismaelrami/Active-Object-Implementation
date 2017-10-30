@@ -7,9 +7,10 @@ import fr.istic.m2il.aoc.observerasynchrone.generator.Generator;
 import fr.istic.m2il.aoc.observerasynchrone.generator.GeneratorImpl;
 import fr.istic.m2il.aoc.observerasynchrone.strategy.AlgoDiffusion;
 import fr.istic.m2il.aoc.observerasynchrone.strategy.Atomic;
+import fr.istic.m2il.aoc.observerasynchrone.strategy.Sequential;
 
 /**
- * Hello world!
+ *
  *
  */
 public class App 
@@ -27,10 +28,16 @@ public class App
         generator.attach(channel2);
         Displayer displayer2 = new DisplayerImpl();
         channel2.attach(displayer2);
+        Channel channel3 = new Channel(generator);
+        generator.attach(channel3);
+        Displayer displayer3 = new DisplayerImpl();
+        channel3.attach(displayer3);
+        Channel channel4 = new Channel(generator);
+        generator.attach(channel4);
+        Displayer displayer4 = new DisplayerImpl();
+        channel4.attach(displayer4);
 
-
-        //generator.generate();
-        for(int i=0; i< 6;i++){
+        for(int i=0; i< 15;i++){
             strategy1.execute();
         }
     }

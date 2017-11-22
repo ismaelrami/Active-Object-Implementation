@@ -14,8 +14,10 @@ public class Channel implements ObserverAsync<Generator>, GeneratorAsync , Subje
     private Generator generator;
     ScheduledExecutorService scheduler;
     private Observer<GeneratorAsync> observersChannel ;
+    private int delay;
 
-    public Channel(Generator generator) {
+    public Channel(Generator generator, int delay) {
+        this.delay = delay;
         this.generator = generator;
         this.scheduler = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
     }
@@ -23,18 +25,14 @@ public class Channel implements ObserverAsync<Generator>, GeneratorAsync , Subje
 
     public Future<Void> update(Generator subjectasync) {
         Callable<Void> update = new Update(this, this.observersChannel);
-        Random randomGenerator = new Random();
-        int delay = randomGenerator.nextInt(1);
-        return this.scheduler.schedule(update,delay, TimeUnit.SECONDS);
+        return this.scheduler.schedule(update,this.delay, TimeUnit.MILLISECONDS);
 
 
     }
 
    public Future<Integer> getValue() {
         Callable<Integer> getValue = new GetValue(this.generator);
-        Random randomGenerator = new Random();
-        int delay = randomGenerator.nextInt(1);
-        return this.scheduler.schedule(getValue, delay, TimeUnit.SECONDS);
+        return this.scheduler.schedule(getValue,this.delay, TimeUnit.MILLISECONDS);
     }
 
     public void attach(Observer<GeneratorAsync> observer) {
@@ -49,17 +47,13 @@ public class Channel implements ObserverAsync<Generator>, GeneratorAsync , Subje
 
     }
 
-   /* public void attach(ObserverAsync<Generator> observerAsync) {
-        this.generator.attach(observerAsync);
+    public int getDelay() {
+        return delay;
     }
 
-    public void detach(ObserverAsync<Generator> observerAsync) {
-        this.generator.detach(observerAsync);
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
-
-    public void notifyObservers() {
-        this.generator.notifyObservers();
-    }*/
 }
 
 

@@ -43,29 +43,34 @@ public class DisplayerController implements Initializable {
     @FXML
     private RadioButton sequential;
 
+    @FXML
+    private Button start;
+
+    @FXML
+    private Button stop;
+
     private AlgoDiffusion strategy;
     private Generator generator;
-    private Boolean run = false;
     ScheduledExecutorService service;
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
 
         generator = new GeneratorImpl();
-        Channel channel1 = new Channel(generator);
+        Channel channel1 = new Channel(generator, 0);
         generator.attach(channel1);
         Displayer displayer1 = new DisplayerImpl(valueDisplayer1);
 
         channel1.attach(displayer1);
-        Channel channel2 = new Channel(generator);
+        Channel channel2 = new Channel(generator, 50);
         generator.attach(channel2);
         Displayer displayer2 = new DisplayerImpl(valueDisplayer2);
         channel2.attach(displayer2);
-        Channel channel3 = new Channel(generator);
+        Channel channel3 = new Channel(generator, 200);
         generator.attach(channel3);
         Displayer displayer3 = new DisplayerImpl(valueDisplayer3);
         channel3.attach(displayer3);
-        Channel channel4 = new Channel(generator);
+        Channel channel4 = new Channel(generator,500);
         generator.attach(channel4);
         Displayer displayer4 = new DisplayerImpl(valueDisplayer4);
         channel4.attach(displayer4);
@@ -77,13 +82,17 @@ public class DisplayerController implements Initializable {
     @FXML
     private void start(){
         service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
-        service.scheduleAtFixedRate(() -> this.strategy.execute(), 0, 100, TimeUnit.MILLISECONDS);
+        service.scheduleAtFixedRate(() -> this.strategy.execute(), 0, 1000, TimeUnit.MILLISECONDS);
+        start.setDisable(true);
+        stop.setDisable(false);
     }
 
     @FXML
     public void stop() {
 
         this.service.shutdown();
+        stop.setDisable(true);
+        start.setDisable(false);
     }
 
     @FXML
@@ -94,7 +103,6 @@ public class DisplayerController implements Initializable {
 
     @FXML
     public void changeStrategyToAtomic(){
-        if(this.run == false) this.run = true;
         this.strategy = new Atomic();
         this.strategy.configure(this.generator);
     }

@@ -10,6 +10,7 @@ import fr.istic.m2il.aoc.observerasynchrone.strategy.AlgoDiffusion;
 import fr.istic.m2il.aoc.observerasynchrone.strategy.Atomic;
 import fr.istic.m2il.aoc.observerasynchrone.strategy.Sequential;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -36,18 +37,22 @@ public class App extends Application
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Observer asynchrone");
-        primaryStage.setOnCloseRequest((event)-> {
-        	controller.stop();
-        });
+
         initApplicationView();
+
+        primaryStage.setOnCloseRequest((event)-> {
+            controller.stop();
+            System.exit(0);
+        });
     }
 
     public void initApplicationView() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getClassLoader().getResource("view/displayer.fxml"));
-            controller = (DisplayerController)loader.getController();
             mainView = (AnchorPane) loader.load();
+            controller = loader.getController();
+
 
             Scene scene = new Scene(mainView);
             primaryStage.setScene(scene);

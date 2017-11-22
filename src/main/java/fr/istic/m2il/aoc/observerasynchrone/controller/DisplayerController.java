@@ -38,6 +38,15 @@ public class DisplayerController implements Initializable {
     @FXML
     private Button stop;
 
+    @FXML
+    private RadioButton sequential;
+
+    @FXML
+    private RadioButton atomic;
+
+    @FXML
+    private Label errorMessage;
+
     private AlgoDiffusion strategy;
     private Generator generator;
     ScheduledExecutorService service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
@@ -70,12 +79,19 @@ public class DisplayerController implements Initializable {
 
     @FXML
     private void start(){
-        if(service.isShutdown()){
-            service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
-            service.scheduleAtFixedRate(() -> this.strategy.execute(), 0, 1000, TimeUnit.MILLISECONDS);
-            start.setDisable(true);
-            stop.setDisable(false);
-        }
+
+            if(!atomic.isSelected() && !sequential.isSelected()){
+                errorMessage.setText("Veuillez choisir une stratégie");
+            }
+            else {
+                service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
+                service.scheduleAtFixedRate(() -> this.strategy.execute(), 0, 1000, TimeUnit.MILLISECONDS);
+                start.setDisable(true);
+                stop.setDisable(false);
+                if(!errorMessage.getText().isEmpty())
+                    errorMessage.setText("");
+            }
+
     }
 
     @FXML

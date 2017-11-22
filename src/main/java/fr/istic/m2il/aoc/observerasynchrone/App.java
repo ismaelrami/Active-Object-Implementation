@@ -27,75 +27,14 @@ import javafx.stage.Stage;
  */
 public class App extends Application
 {
-    /*public static void main( String[] args )
-    {
-        Generator generator = new GeneratorImpl();
-        AlgoDiffusion strategy1 = new Atomic();
-        strategy1.configure(generator);
-        Channel channel1 = new Channel(generator);
-        generator.attach(channel1);
-        Displayer displayer1 = new DisplayerImpl();
-        channel1.attach(displayer1);
-        Channel channel2 = new Channel(generator);
-        generator.attach(channel2);
-        Displayer displayer2 = new DisplayerImpl();
-        channel2.attach(displayer2);
-        Channel channel3 = new Channel(generator);
-        generator.attach(channel3);
-        Displayer displayer3 = new DisplayerImpl();
-        channel3.attach(displayer3);
-        Channel channel4 = new Channel(generator);
-        generator.attach(channel4);
-        Displayer displayer4 = new DisplayerImpl();
-        channel4.attach(displayer4);
-
-        for(int i=0; i< 15;i++){
-            strategy1.execute();
-        }
-    }*/
-
     private Stage primaryStage;
     private AnchorPane mainView;
-    @FXML
-    private Button start;
-
-    @FXML
-    private Button stop;
-
-    @FXML
-    private Label valueDisplayer1;
-
-    @FXML
-    private Label valueDisplayer2;
-
-    @FXML
-    private Label valueDisplayer3;
-
-    @FXML
-    private Label valueDisplayer4;
-
-    @FXML
-    private RadioButton atomic;
-
-    @FXML
-    private RadioButton sequential;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Observer asynchrone");
-
         initApplicationView();
-        /*DisplayerController displayerController = new DisplayerController();
-        displayerController.setMain(mainView);
-        displayerController.setPrimaryStage(primaryStage);
-        displayerController.initializeDisplayer();*/
-        //showWiew();
-
-
-
-
-
     }
 
     public void initApplicationView() {

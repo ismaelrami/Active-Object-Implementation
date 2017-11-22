@@ -16,12 +16,7 @@ import fr.istic.m2il.aoc.observerasynchrone.generator.GeneratorImpl;
 import fr.istic.m2il.aoc.observerasynchrone.strategy.AlgoDiffusion;
 import fr.istic.m2il.aoc.observerasynchrone.strategy.Atomic;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.RadioButton;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class DisplayerController implements Initializable {
 
@@ -36,12 +31,6 @@ public class DisplayerController implements Initializable {
 
     @FXML
     private Label valueDisplayer4;
-
-    @FXML
-    private RadioButton atomic;
-
-    @FXML
-    private RadioButton sequential;
 
     @FXML
     private Button start;
@@ -81,10 +70,12 @@ public class DisplayerController implements Initializable {
 
     @FXML
     private void start(){
-        service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
-        service.scheduleAtFixedRate(() -> this.strategy.execute(), 0, 1000, TimeUnit.MILLISECONDS);
-        start.setDisable(true);
-        stop.setDisable(false);
+        if(service.isShutdown()){
+            service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
+            service.scheduleAtFixedRate(() -> this.strategy.execute(), 0, 1000, TimeUnit.MILLISECONDS);
+            start.setDisable(true);
+            stop.setDisable(false);
+        }
     }
 
     @FXML

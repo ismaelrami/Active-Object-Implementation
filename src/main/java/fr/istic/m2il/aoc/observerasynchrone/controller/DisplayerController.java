@@ -40,7 +40,7 @@ public class DisplayerController implements Initializable {
 
     private AlgoDiffusion strategy;
     private Generator generator;
-    ScheduledExecutorService service;
+    ScheduledExecutorService service = Executors.newScheduledThreadPool(Integer.MAX_VALUE);
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {

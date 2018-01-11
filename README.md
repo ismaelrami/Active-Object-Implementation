@@ -3,7 +3,7 @@
 ## Usage
 
   > Exécution :
-      Dans le dossier mutator/target: java -jar mutator-1.0-SNAPSHOT-jar-with-dependencies.jar file.properties
+      java -jar fr.istic.m2il.aoc.observerasynchrone-1.0-SNAPSHOT-jar-with-dependencies.jar
       
   > Lire la JavaDoc: 
       Ouvrir le fichier index.html du dossier javadoc

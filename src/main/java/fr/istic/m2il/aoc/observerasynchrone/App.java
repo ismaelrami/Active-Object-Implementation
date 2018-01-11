@@ -36,18 +36,21 @@ public class App extends Application
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Observer asynchrone");
+      
+        initApplicationView();
         primaryStage.setOnCloseRequest((event)-> {
         	controller.stop();
+        	System.exit(0);
         });
-        initApplicationView();
     }
 
     public void initApplicationView() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getClassLoader().getResource("view/displayer.fxml"));
-            controller = (DisplayerController)loader.getController();
             mainView = (AnchorPane) loader.load();
+            controller = loader.getController();
+           
 
             Scene scene = new Scene(mainView);
             primaryStage.setScene(scene);

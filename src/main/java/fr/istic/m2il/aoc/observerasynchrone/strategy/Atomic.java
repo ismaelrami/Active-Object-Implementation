@@ -6,7 +6,7 @@ import fr.istic.m2il.aoc.observerasynchrone.observer.ObserverAsync;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Represnts the atomic diffusion strategy
+ * Represnts the atomic coherence diffusion strategy
  */
 public class Atomic implements AlgoDiffusion {
     private Generator generator;

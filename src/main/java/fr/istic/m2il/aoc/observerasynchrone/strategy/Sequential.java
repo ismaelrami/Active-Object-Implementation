@@ -4,7 +4,7 @@ import fr.istic.m2il.aoc.observerasynchrone.generator.Generator;
 import fr.istic.m2il.aoc.observerasynchrone.observer.ObserverAsync;
 
 /**
- * Represnts the sequential diffusion strategy
+ * Represnts the sequential coherence diffusion strategy
  */
 public class Sequential implements AlgoDiffusion{
     private Generator generator;

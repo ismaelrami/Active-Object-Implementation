@@ -43,5 +43,6 @@
             <ToggleGroup fx:id="group" />
          </toggleGroup></RadioButton>
 		<RadioButton fx:id="sequential" layoutX="428.0" layoutY="26.0" mnemonicParsing="false" onMouseClicked="#changeStrategyToSequential" text="Sequentielle" toggleGroup="$group" />
+      <Label fx:id="errorMessage" layoutX="161.0" layoutY="60.0" prefHeight="16.0" prefWidth="333.0" />
 	</children>
 </AnchorPane>

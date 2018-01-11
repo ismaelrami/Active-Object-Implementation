@@ -5,8 +5,11 @@ import fr.istic.m2il.aoc.observerasynchrone.observer.SubjectAsync;
 
 import java.util.List;
 
+/**
+ * Represents Generator Interface
+ */
 public interface Generator extends SubjectAsync<Generator> {
     Integer getValue();
     void generate();
-    public List<ObserverAsync<Generator>> getAsyncObservers();
+    List<ObserverAsync<Generator>> getAsyncObservers();
 }

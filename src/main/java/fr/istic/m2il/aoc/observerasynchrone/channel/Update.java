@@ -14,6 +14,10 @@ public class Update implements Callable<Void> {
         this.obsever = obsever;
     }
 
+    /**
+     * Update the Displayer with the new value generate by generator asynchronously
+     * @return value of Displayer.update() method synchronously
+     */
     private void update(){
         this.obsever.update(this.generatorAsync);
     }

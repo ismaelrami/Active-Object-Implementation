@@ -1,5 +1,7 @@
 # Active Object Pattern Implementation
-An implementation of Active Object Pattern to enable asyncronous on java project
+An implementation of Active Object Pattern to enable asyncronicity on java project.
+
+Test on simple java project to display random genrated numbers on differents displayer using three synchronization methods
 
 ## Usage
 

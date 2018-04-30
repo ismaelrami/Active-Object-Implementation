@@ -1,4 +1,5 @@
 # Active Object Pattern Implementation
+An implementation of Active Object Pattern to enable asyncronous on java project
 
 ## Usage
 

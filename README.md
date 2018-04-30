@@ -1,7 +1,7 @@
 # Active Object Pattern Implementation
 An implementation of Active Object Pattern to enable asyncronicity on java project.
 
-Test on simple java project to display random genrated numbers on differents displayer using two synchronization strategies:
+Test on simple java project, that implemented asynchronous observer pattern to display random genrated numbers on differents displayer using two synchronization strategies:
    - Atomic
    - Sequential
 
